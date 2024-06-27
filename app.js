@@ -5,7 +5,7 @@ const port = 3000
 
 const webRoutes = require('./routes/routes')
 
-app.use(webRoutes) 
+app.use('/api', webRoutes);
 
 app.get('/', (req, res) => {
     sql.query('SELECT * FROM plataforma', (err, results, fields) => {

@@ -1,15 +1,68 @@
+const sql = require('../dbconnect/dbconnect') 
+
 exports.getGame = (req, res) => {
-    res.send(`Juego obtenido`); 
+    sql.query('SELECT * FROM videojuegos', (err, results, fields) => {
+        if (err) {
+          console.error('Error en la consulta:', err.stack);
+          res.status(500).send('Error en la base de datos');
+          return;
+        }
+        res.json(results);
+    });
 };
 
 exports.createGame = (req, res) => {
-    res.send(`Juego añadido`); 
+    const { nombre, url, plataforma, categoria, img } = req.body;
+    const query = 'INSERT INTO videojuegos (nombre, url, plataforma, categoria, img) VALUES (?, ?, ?, ?, ?)';
+    const values = [nombre, url, plataforma, categoria, img];
+
+    sql.query(query, values, (err, results, fields) => {
+        if (err) {
+            console.error('Error en la consulta:', err.stack);
+            res.status(500).send('Error en la base de datos');
+            return;
+        }
+        res.status(201).json({ id: results.insertId, nombre, categoria, plataforma, img, url });
+    });
 };
+
 
 exports.editGame = (req, res) => {
-    res.send(`Juego editado`); 
+    const { id } = req.params;
+    const { nombre, url, plataforma, categoria, img } = req.body;
+    const query = 'UPDATE videojuegos SET nombre = ?, categoria = ?, plataforma = ?, img = ?, url = ? WHERE id = ?';
+    const values = [nombre, url, plataforma, categoria, img];
+
+    sql.query(query, values, (err, results, fields) => {
+        if (err) {
+            console.error('Error en la consulta:', err.stack);
+            res.status(500).send('Error en la base de datos');
+            return;
+        }
+        if (results.affectedRows === 0) {
+            res.status(404).send('Videojuego no encontrado');
+            return;
+        }
+        res.json({ id, nombre, url, plataforma, categoria, img });
+    });
 };
 
+
 exports.deleteGame = (req, res) => {
-    res.send(`Juego eliminado`); 
+    const { id } = req.params;
+    const query = 'DELETE FROM videojuegos WHERE id = ?';
+    const values = [id];
+
+    sql.query(query, values, (err, results, fields) => {
+        if (err) {
+            console.error('Error en la consulta:', err.stack);
+            res.status(500).send('Error en la base de datos');
+            return;
+        }
+        if (results.affectedRows === 0) {
+            res.status(404).send('Videojuego no encontrado');
+            return;
+        }
+        res.json({ message: 'Videojuego eliminado' });
+    });
 };
