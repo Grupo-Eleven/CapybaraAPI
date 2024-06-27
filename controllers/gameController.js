@@ -26,7 +26,6 @@ exports.createGame = (req, res) => {
     });
 };
 
-
 exports.editGame = (req, res) => {
     const { id } = req.params;
     const { nombre, url, plataforma, categoria, img } = req.body;
@@ -46,7 +45,6 @@ exports.editGame = (req, res) => {
         res.json({ id, nombre, url, plataforma, categoria, img });
     });
 };
-
 
 exports.deleteGame = (req, res) => {
     const { id } = req.params;
