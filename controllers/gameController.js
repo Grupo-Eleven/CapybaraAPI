@@ -1,7 +1,7 @@
-const sql = require('../dbconnect/dbconnect') 
+const { connection } = require('../dbconnect/dbconnect') 
 
 exports.getGame = (req, res) => {
-    sql.query('SELECT * FROM videojuegos', (err, results, fields) => {
+    connection.query('SELECT * FROM videojuegos', (err, results, fields) => {
         if (err) {
           console.error('Error en la consulta:', err.stack);
           res.status(500).send('Error en la base de datos');
@@ -16,7 +16,7 @@ exports.createGame = (req, res) => {
     const query = 'INSERT INTO videojuegos (nombre, url, plataforma, categoria, img) VALUES (?, ?, ?, ?, ?)';
     const values = [nombre, url, plataforma, categoria, img];
 
-    sql.query(query, values, (err, results, fields) => {
+    connection.query(query, values, (err, results, fields) => {
         if (err) {
             console.error('Error en la consulta:', err.stack);
             res.status(500).send('Error en la base de datos');
@@ -32,7 +32,7 @@ exports.editGame = (req, res) => {
     const query = 'UPDATE videojuegos SET nombre = ?, categoria = ?, plataforma = ?, img = ?, url = ? WHERE id = ?';
     const values = [nombre, url, plataforma, categoria, img];
 
-    sql.query(query, values, (err, results, fields) => {
+    connection.query(query, values, (err, results, fields) => {
         if (err) {
             console.error('Error en la consulta:', err.stack);
             res.status(500).send('Error en la base de datos');
@@ -51,7 +51,7 @@ exports.deleteGame = (req, res) => {
     const query = 'DELETE FROM videojuegos WHERE id = ?';
     const values = [id];
 
-    sql.query(query, values, (err, results, fields) => {
+    connection.query(query, values, (err, results, fields) => {
         if (err) {
             console.error('Error en la consulta:', err.stack);
             res.status(500).send('Error en la base de datos');

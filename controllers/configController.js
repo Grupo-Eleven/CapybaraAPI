@@ -1,7 +1,7 @@
-const sql = require('../dbconnect/dbconnect') 
+const { connection } = require('../dbconnect/dbconnect') 
 
 exports.getCategories = (req, res) => {
-    sql.query('SELECT * FROM categoria', (err, results, fields) => {
+  connection.query('SELECT * FROM categoria', (err, results, fields) => {
         if (err) {
           console.error('Error en la consulta:', err.stack);
           res.status(500).send('Error en la base de datos');
@@ -12,7 +12,7 @@ exports.getCategories = (req, res) => {
 };
 
 exports.getPlatforms = (req, res) => {
-    sql.query('SELECT * FROM plataforma', (err, results, fields) => {
+  connection.query('SELECT * FROM plataforma', (err, results, fields) => {
         if (err) {
           console.error('Error en la consulta:', err.stack);
           res.status(500).send('Error en la base de datos');
