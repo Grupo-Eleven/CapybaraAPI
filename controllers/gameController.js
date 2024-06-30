@@ -13,8 +13,15 @@ exports.getGames = async (req, res) => {
 exports.getGame = async (req, res) => {
     try {
         const { id } = req.body;
-        const [results, fields] = await connection.query('SELECT * FROM videojuegos');
-        res.json(results);
+        if (!id) {
+            return res.status(400).send('ID is required');
+        }
+        const query = 'SELECT * FROM videojuegos WHERE id = ?';
+        const [results, fields] = await connection.promise().query(query, [id]);
+        if (results.length === 0) {
+            return res.status(404).send('Game not found');
+        }
+        res.json(results[0]);
     } catch (err) {
         console.error('Error en la consulta:', err.stack);
         res.status(500).send('Error en la base de datos');
