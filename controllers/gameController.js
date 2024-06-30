@@ -1,7 +1,18 @@
 const { connection } = require('../dbconnect/dbconnect');
 
+exports.getGames = async (req, res) => {
+    try {
+        const [results, fields] = await connection.query('SELECT * FROM videojuegos');
+        res.json(results);
+    } catch (err) {
+        console.error('Error en la consulta:', err.stack);
+        res.status(500).send('Error en la base de datos');
+    }
+};
+
 exports.getGame = async (req, res) => {
     try {
+        const { id } = req.body;
         const [results, fields] = await connection.query('SELECT * FROM videojuegos');
         res.json(results);
     } catch (err) {

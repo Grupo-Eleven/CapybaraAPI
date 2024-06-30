@@ -4,6 +4,8 @@ const game = require('../controllers/gameController')
 const config = require('../controllers/configController')
 
 
+router.get('/games', game.getGames)
+
 router.get('/game', game.getGame)
 router.post('/game', game.createGame)
 router.put('/game', game.editGame)
