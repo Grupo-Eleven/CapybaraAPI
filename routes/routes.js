@@ -6,7 +6,7 @@ const config = require('../controllers/configController')
 
 router.get('/games', game.getGames)
 
-router.get('/game', game.getGame)
+router.get('/game/:id', game.getGame)
 router.post('/game', game.createGame)
 router.put('/game', game.editGame)
 router.delete('/game', game.deleteGame)
