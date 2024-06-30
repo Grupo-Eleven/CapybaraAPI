@@ -12,7 +12,7 @@ exports.getGames = async (req, res) => {
 
 exports.getGame = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         if (!id) {
             return res.status(400).send('ID is required');
         }
