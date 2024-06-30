@@ -17,7 +17,7 @@ exports.getGame = async (req, res) => {
             return res.status(400).send('ID is required');
         }
         const query = 'SELECT * FROM videojuegos WHERE id = ?';
-        const [results, fields] = await connection.promise().query(query, [id]);
+        const [results, fields] = await connection.query(query, [id]);
         if (results.length === 0) {
             return res.status(404).send('Game not found');
         }
