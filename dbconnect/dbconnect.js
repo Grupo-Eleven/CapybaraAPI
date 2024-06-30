@@ -11,7 +11,7 @@ const pool = mysql.createConnection({
     queueLimit: 0
 });
 
-connection.connect((err) => {
+pool.promise().connect((err) => {
     if (err) {
         console.error('Error connecting: ' + err.stack);
         return;
