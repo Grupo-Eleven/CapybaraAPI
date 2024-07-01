@@ -32,6 +32,7 @@ exports.createGame = async (req, res) => {
     const { nombre, url, about, plataforma, categoria, home, img } = req.body
     const query = 'INSERT INTO videojuegos (nombre, url, about, plataforma, categoria, home, img) VALUES (?, ?, ?, ?, ?, ?, ?)'
     const values = [nombre, url, about, plataforma, categoria, home, img]
+    console.log(values)
 
     try {
         const [results, fields] = await connection.query(query, values)
