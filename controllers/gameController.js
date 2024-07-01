@@ -29,13 +29,13 @@ exports.getGame = async (req, res) => {
 };
 
 exports.createGame = async (req, res) => {
-    const { nombre, url, plataforma, categoria, img } = req.body
-    const query = 'INSERT INTO videojuegos (nombre, url, plataforma, categoria, img) VALUES (?, ?, ?, ?, ?)'
-    const values = [nombre, url, plataforma, categoria, img]
+    const { nombre, url, about, plataforma, categoria, home, img } = req.body
+    const query = 'INSERT INTO videojuegos (nombre, url, about, plataforma, categoria, home, img) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    const values = [nombre, url, about, plataforma, categoria, home, img]
 
     try {
         const [results, fields] = await connection.query(query, values)
-        res.status(201).json({ id: results.insertId, nombre, categoria, plataforma, img, url })
+        res.status(201).json({ id: results.insertId, nombre, url, about, plataforma, categoria, home, img })
     } catch (err) {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
@@ -44,9 +44,9 @@ exports.createGame = async (req, res) => {
 
 exports.editGame = async (req, res) => {
     const { id } = req.params
-    const { nombre, url, plataforma, categoria, img } = req.body
-    const query = 'UPDATE videojuegos SET nombre = ?, categoria = ?, plataforma = ?, img = ?, url = ? WHERE id = ?'
-    const values = [nombre, url, plataforma, categoria, img, id]
+    const { nombre, url, about, plataforma, categoria, home, img } = req.body
+    const query = 'UPDATE videojuegos SET nombre = ?, url = ?, about = ?, categoria = ?, plataforma = ?, home = ?, img = ? WHERE id = ?'
+    const values = [nombre, url, about, plataforma, categoria, home, img, id]
 
     try {
         const [results, fields] = await connection.query(query, values)
@@ -54,7 +54,7 @@ exports.editGame = async (req, res) => {
             res.status(404).send('Videojuego no encontrado')
             return;
         }
-        res.json({ id, nombre, url, plataforma, categoria, img })
+        res.json({ id, nombre, url, about, plataforma, categoria, home, img })
     } catch (err) {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
