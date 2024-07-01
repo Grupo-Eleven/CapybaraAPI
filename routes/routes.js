@@ -5,7 +5,7 @@ const config = require('../controllers/configController')
 const login = require('../controllers/loginController')
 const auth = require('../config/auth')
 
-router.get('/login', login.login)
+router.post('/login', login.login)
 
 router.get('/games', game.getGames)
 
