@@ -5,7 +5,7 @@ const jwtconfig = require('./../config/jwtconfig.js')
 
 exports.login = async (req, res) => {
     const {user, password} = req.body
-    const[[valido]] = await conn.query(`SELECT * FROM users WHERE user = ?`, user)
+    const[[valido]] = await conn.query(`SELECT * FROM users WHERE username = ?`, user)
     console.log(valido)
     if(valido === undefined){
         res.status(404).send('Usuario no encontrado')
