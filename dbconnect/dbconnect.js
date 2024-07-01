@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2')
 
 const pool = mysql.createConnection({
     host: 'sql10.freesqldatabase.com',
@@ -13,20 +13,12 @@ const pool = mysql.createConnection({
 
 pool.promise().connect((err) => {
     if (err) {
-        console.error('Error connecting: ' + err.stack);
+        console.error('Error connecting: ' + err.stack)
         return;
     }
-    console.log('Connected as id ' + connection.threadId);
+    console.log('Connected as id ' + connection.threadId)
 });
 
 module.exports = {
     connection: pool.promise()
 }
-// connection.end((err) => {
-//     if (err) {
-//       console.error('Error cerrando la conexión:', err.stack);
-//       return;
-//     }
-//     console.log('Conexión cerrada');
-//   });
-  
