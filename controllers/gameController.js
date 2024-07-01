@@ -18,7 +18,12 @@ exports.getGame = async (req, res) => {
         if (!id) {
             return res.status(400).send("ID is required");
         }
-        const query = "SELECT * FROM videojuegos WHERE id = ?";
+        const query = `
+            SELECT videojuegos.*, plataforma.nombre AS plataforma_nombre
+            FROM videojuegos
+            JOIN plataforma ON videojuegos.plataforma = plataforma.id
+            WHERE videojuegos.id = ?
+        `;
         const [results, fields] = await connection.query(query, [id]);
         if (results.length === 0) {
             return res.status(404).send("Game not found");
