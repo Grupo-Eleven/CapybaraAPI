@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const game = require('../controllers/gameController')
 const config = require('../controllers/configController')
-const login = require('./controllers/loginController')
+const login = require('../controllers/loginController')
 const auth = require('../config/auth')
 
 router.get('/login', login.login)
