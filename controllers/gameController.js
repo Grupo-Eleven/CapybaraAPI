@@ -8,7 +8,7 @@ exports.getGames = async (req, res) => {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
     }
-};
+}
 
 exports.getGame = async (req, res) => {
     try {
@@ -26,7 +26,7 @@ exports.getGame = async (req, res) => {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
     }
-};
+}
 
 exports.createGame = async (req, res) => {
     const { nombre, url, about, plataforma, categoria, home, img } = req.body
@@ -41,7 +41,7 @@ exports.createGame = async (req, res) => {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
     }
-};
+}
 
 exports.editGame = async (req, res) => {
     const { id } = req.params
@@ -60,7 +60,7 @@ exports.editGame = async (req, res) => {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
     }
-};
+}
 
 exports.deleteGame = async (req, res) => {
     const { id } = req.params
@@ -78,4 +78,4 @@ exports.deleteGame = async (req, res) => {
         console.error('Error en la consulta:', err.stack)
         res.status(500).send('Error en la base de datos')
     }
-};
+}
