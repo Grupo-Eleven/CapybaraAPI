@@ -11,6 +11,8 @@ exports.login = async (req, res) => {
         if (!valido) {
             return res.status(404).send('Usuario no encontrado')
         }
+        const encriptado = await crypt.hash(password, 5)
+        console.log(encriptado)
         const isPasswordValid = await crypt.compare(password, valido.password)
         if (!isPasswordValid) {
             return res.status(401).send({ auth: false, token: null })
