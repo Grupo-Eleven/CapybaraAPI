@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
         res.status(404).send('Usuario no encontrado')
     } else if (!(await crypt.compare(password, valido.password))){
         res.status(401).send({auth: false, token: null})
-    } else { // Error en clase: escribí "expriresIn" en lugar de "expiresIn" y no se genera bien el token
+    } else {
         let token = jtoken.sign({id: valido.id}, jwtconfig.secretKey, {expiresIn: jwtconfig.tokenExpiresIn})
         res.status(201).send({auth: true, token})
     }
